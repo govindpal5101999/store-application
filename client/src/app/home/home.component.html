@@ -1,0 +1,128 @@
+<main class="contain">
+    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
+                aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+
+                <div class="container">
+                    <div class="carousel-caption text-start">
+                        <h1>Get sales revenue by choosing date</h1>
+                        <p>Sales revenue of selected date with paid status only are managed here ....</p>
+                        <p>
+                            <input type="date" class="form-control date-input" [(ngModel)]="customDate"
+                                (change)="changeDate()" required />
+                            <button [disabled]="!getDate" class="btn btn-primary" type="button" id="button-addon2"
+                                (click)="getDataByDate()">Get</button>
+
+                        </p>
+                        <p id="revenue" *ngFor="let dt of dataContainer">Sales revenue as on {{dt.Date}} is ₹{{total}}
+                        </p>
+                        <p id="sales-error" style="display: none;">No Data To Show</p>
+                        <div class="progress">
+                            <div id="dynamic" class="progress-bar progress-bar-success progress-bar-striped active"
+                                role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+                                style="width: 0%">
+                                <span id="current-progress"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h1>Get all paid products details</h1>
+                        <p>Products are managed here with there paid status....</p>
+                        <p> <button class="btn btn-primary" data-bs-toggle="collapse" href="#collapsePaid" role="button"
+                                aria-expanded="false" aria-controls="collapseExample">
+                                Paid Status
+                            </button></p>
+                        <div class="collapse" id="collapsePaid">
+                            <p id="paid-error"></p>
+                            <table id="paid-table" class="table table-success table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">UnitPrice</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">TotalAmount</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Image</th>
+                                        <th scope="col">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let st of statusdata">
+                                        <td>{{st.Name}}</td>
+                                        <td>{{st.UnitPrice | currency:"INR":"symbol"}}</td>
+                                        <td>{{st.Quantity}}</td>
+                                        <td>{{st.TotalAmount | currency:"INR":"symbol"}}</td>
+                                        <td>{{st.Date}}</td>
+                                        <td><img class="databaseImgs" src="{{url}}{{st.Image}}" alt="failed" /></td>
+                                        <td>{{st.Status}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="carousel-item">
+
+                <div class="container">
+                    <div class="carousel-caption text-end">
+                        <h1>Get all unpaid products details</h1>
+                        <p>Another side of status is 'UNPAID' which is managed here with there unpaid status... </p>
+                        <p> <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseUnpaid" aria-expanded="true" aria-controls="collapseUnpaid">
+                                Unpaid Status
+                            </button></p>
+                        <div class="collapse" id="collapseUnpaid">
+                            <p id="unpaid-error"></p>
+                            <table id="unpaid-table" class="table table-success table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">UnitPrice</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">TotalAmount</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Image</th>
+                                        <th scope="col">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let un of Unpaidstatusdata">
+                                        <td>{{un.Name}}</td>
+                                        <td>{{un.UnitPrice | currency:"INR":"symbol"}}</td>
+                                        <td>{{un.Quantity}}</td>
+                                        <td>{{un.TotalAmount | currency:"INR":"symbol"}}</td>
+                                        <td>{{un.Date}}</td>
+                                        <td><img class="databaseImgs" src="{{url}}{{un.Image}}" alt="failed" /></td>
+                                        <td>{{un.Status}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</main>
