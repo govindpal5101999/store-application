@@ -1,0 +1,56 @@
+<div class="contain">
+    <div  id="floating-panel">
+        <h2 style="text-align: center; font-size: 30px; color: rgb(221, 241, 235);">Update Products</h2>
+        <div style="color: rgb(255, 255, 255);" class="row justify-content-center">
+          <div class="col-md-10">
+              <form [formGroup]="stationeryForm" (ngSubmit)="onUpdate()">
+                <div class="form-group">
+                  <label>Product Name</label>
+                  <input class="form-control"  type="text" formControlName="Name" />
+                </div>
+        
+                <div class="form-group">
+                  <label>UnitPrice</label>
+                  <input class="form-control"  type="text" formControlName="UnitPrice" placeholder="₹"  (change)="unitPriceChange()"/>
+                </div>
+        
+                <div class="form-group">
+                  <label>Quantity</label>
+                  <input class="form-control" type="text" formControlName="Quantity" (change)="quantityChange()"/>
+                </div>
+      
+                <div class="form-group">
+                  <label>ToatalAmount</label>
+                  <input matinput readonly class="form-control" id="TA" type="text" formControlName="TotalAmount" placeholder="₹" />
+                </div>
+      
+                <div class="form-group">
+                  <label>Date</label>
+                  <input class="form-control" type="date" formControlName="Date" [(ngModel)]="date" required/>
+                </div>
+      
+                <div class="form-group">
+                  <label>Image</label>
+                  <input class="form-control" (change)=" selectFile($event)" type="file" formControlName="Image" />
+                </div>
+      
+                <!-- <div class="form-group">
+                  <label>Status</label>
+                  <input class="form-control" type="text" formControlName="Status" />
+                </div> -->
+                <div class="form-group">
+                  <label>Status</label><br>
+                  <select id="status" formControlName="Status">
+                    <option *ngFor="let c of PaidUnpaidstatus" [ngValue]="c">{{ c }}</option>
+                </select>
+                </div>
+                <br>
+                <div class="form-group">
+                  <button class="btn btn-primary btn-block" type="submit">Update</button>
+                </div>
+              </form>
+          </div>
+        </div>
+      </div>
+
+</div>

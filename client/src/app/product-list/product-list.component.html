@@ -1,0 +1,54 @@
+<div class="contain">
+  <div id="table-container">
+    <div *ngIf="alert" class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>Deleted</strong> Successfully!
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="input-group mb-3">
+      <input type="text" name="search" class="form-control" aria-label="Sizing example input"
+        aria-describedby="inputGroup-sizing-default" placeholder="search item here" [(ngModel)]="searchItem">
+  
+    </div>
+  
+    <h1>Products List</h1>
+    <div id="scroll-div">
+      <table style="background: none;" class="table table-success">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">UnitPrice</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">TotalAmount</th>
+            <th scope="col">Date</th>
+            <th scope="col">Image</th>
+            <th scope="col">Status</th>
+            <th scope="col">Operations</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pro of Allproducts |filter:searchItem">
+            <td>{{pro._id}}</td>
+            <td>{{pro.Name}}</td>
+            <td>{{pro.UnitPrice | currency:"INR":"symbol"}}</td>
+            <td>{{pro.Quantity}}</td>
+            <td>{{pro.TotalAmount | currency:"INR":"symbol"}} </td>
+            <td>{{pro.Date}}</td>
+            <td><img class="databaseImgs" src="{{url}}{{pro.Image}}" alt="failed" /></td>
+            <td>{{pro.Status}}</td>
+            <td> <button class="btn btn-danger" (click)="delete(pro._id)">
+                Delete
+              </button>
+              <a style="margin-left: 4px;" class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
+                routerLink="/productupdate/{{pro._id}}">
+                Edit
+              </a>
+  
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <button class="btn btn-danger" (click)="deleteAllProducts()">Delete All</button>
+  </div>
+</div>
